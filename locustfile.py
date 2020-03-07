@@ -2,6 +2,7 @@ from locust import HttpLocust, TaskSet, task, between
 from gevent import GreenletExit
 from locust.exception import StopLocust
 
+# this is not the best - in case oTree decides to change the bot complete message later.
 BOT_COMPLETE_HTML_MESSAGE = b'''
 <html>
     <head>
