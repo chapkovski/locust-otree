@@ -12,14 +12,10 @@ BOT_COMPLETE_HTML_MESSAGE = b'''
 '''
 
 
-class FooApplication():
-    def __init__(self, client, joincode=None, host=None):
+class OtreeApplication:
+    def __init__(self, client, host=None):
         self.client = client
-        self.joincode = joincode
-        if host is None:
-            self.start_url= f'/join/{self.joincode}/'
-        else:
-            self.start_url = host
+        self.start_url = host
 
     def first_page(self):
         with self.client.get(self.start_url, name=self.start_url, catch_response=True) as response:
@@ -38,25 +34,24 @@ class FooApplication():
                     print('IM DONE')
                     status = False
                     response.success()
-                elif response.content != BOT_COMPLETE_HTML_MESSAGE:
+                elif response.content != BOT_COMPLETE_HTML_MESSAGE and oldlink != newlink:
                     status = response.ok
                     response.success()
                 else:
                     response.failure()
 
 
-class FooTaskSet(TaskSet):
+class OtreeTaskSet(TaskSet):
     def on_start(self):
-        self.foo = FooApplication(self.client, host=self.parent.host)
+        self.foo = OtreeApplication(self.client, host=self.parent.host)
 
     @task(1)
-    def login(self):
+    def start_bot(self):
         self.foo.first_page()
         raise StopLocust()
-
 
 
 class WebsiteUser(HttpLocust):
     wait_time = between(5, 9)
     host = 'http://localhost:8000'
-    task_set = FooTaskSet
+    task_set = OtreeTaskSet
