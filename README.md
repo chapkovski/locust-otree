@@ -10,4 +10,5 @@
 
 4. The front page should look like that:
 ![alt text][front]
-[front]: ./img/locust_first_page.png "Logo Title Text 2"
+
+[front]: https://raw.githubusercontent.com/chapkovski/locust-otree/master/img/locust_first_page.png "Logo Title Text 2"
