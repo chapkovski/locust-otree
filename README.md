@@ -11,4 +11,9 @@
 4. The front page should look like that:
 ![alt text][front]
 
-[front]: https://raw.githubusercontent.com/chapkovski/locust-otree/master/img/locust_first_page.png "Logo Title Text 2"
+[front]: https://raw.githubusercontent.com/chapkovski/locust-otree/master/img/locust_first_page.png "Front"
+
+5. Open your oTree app and create a session with browser bots activated:
+![alt text][session10]
+
+[session10]: https://raw.githubusercontent.com/chapkovski/locust-otree/master/img/session_10.png "Session 10"
