@@ -35,7 +35,7 @@ class OtreeApplication:
                     print('IM DONE')
                     status = False
                     response.success()
-                elif response.content != BOT_COMPLETE_HTML_MESSAGE and oldlink != newlink:
+                elif response.content != BOT_COMPLETE_HTML_MESSAGE and response.ok:
                     status = response.ok
                     response.success()
                 else:
