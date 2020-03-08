@@ -39,7 +39,7 @@ class OtreeApplication:
                     status = response.ok
                     response.success()
                 else:
-                    response.failure()
+                    response.failure('oTree-Locust error')
 
 
 class OtreeTaskSet(TaskSet):
