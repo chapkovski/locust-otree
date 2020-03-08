@@ -22,6 +22,11 @@
 (corresponding to number of users in a session you created), and the speed of 
 __hatching__ (how quckly they join the game.)
 
+![alt text][paste]
+
+[paste]: https://raw.githubusercontent.com/chapkovski/locust-otree/master/img/paste_to_locust.gif "Session 10"
+
+
 7. Observe how they start playing and the response times, and if there are any failures there.
 
 
