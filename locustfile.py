@@ -45,11 +45,11 @@ class OtreeApplication:
 
 class OtreeTaskSet(TaskSet):
     def on_start(self):
-        self.foo = OtreeApplication(self.client, host=self.parent.host)
+        self.otree_client = OtreeApplication(self.client, host=self.parent.host)
 
     @task(1)
     def start_bot(self):
-        self.foo.first_page()
+        self.otree_client.first_page()
         raise StopLocust()
 
 
