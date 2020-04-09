@@ -2,15 +2,6 @@ from locust import HttpLocust, TaskSet, task, between
 from gevent import GreenletExit
 from locust.exception import StopLocust
 
-# this is not the best - in case oTree decides to change the bot complete message later.
-BOT_COMPLETE_HTML_MESSAGE = b'''
-<html>
-    <head>
-        <title>Bot completed</title>
-    </head>
-    <body>Bot completed</body>
-</html>
-'''
 
 
 class OtreeApplication:
@@ -31,11 +22,12 @@ class OtreeApplication:
                 oldlink = newlink
                 newlink = response.url
                 print(f'GONNA GO TO {newlink}')
-                if response.content == BOT_COMPLETE_HTML_MESSAGE and oldlink == newlink:
+                # trying to catch OutOfRangeNotification
+                if newlink.split('/')[3] == 'OutOfRangeNotification':
                     print('IM DONE')
                     status = False
                     response.success()
-                elif response.content != BOT_COMPLETE_HTML_MESSAGE and response.ok:
+                elif response.ok:
                     status = response.ok
                     response.success()
                 else:

@@ -1,5 +1,8 @@
 # Locust script for testing oTree apps
 
+## Attention:
+This code will work with the most recent version of oTree. For older ones, a slightly different approach is needed. DM me.
+
 ## Installation:
 1. Install locust: 
 `pip install locust`
