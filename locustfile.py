@@ -1,6 +1,20 @@
 from locust import HttpLocust, TaskSet, task, between
 from gevent import GreenletExit
 from locust.exception import StopLocust
+from otree import __version__
+# this is not the best - in case oTree decides to change the bot complete message later.
+
+########### BLOCK: FOR OLD (<2.6)  otree version ##############################################################
+
+BOT_COMPLETE_HTML_MESSAGE = b'''
+<html>
+    <head>
+        <title>Bot completed</title>
+    </head>
+    <body>Bot completed</body>
+</html>
+'''
+############ END OF: FOR OLD (<2.6)  otree version #############################################################
 
 
 
@@ -21,13 +35,18 @@ class OtreeApplication:
             with self.client.post(newlink, name=name, catch_response=True) as response:
                 oldlink = newlink
                 newlink = response.url
-                print(f'GONNA GO TO {newlink}')
-                # trying to catch OutOfRangeNotification
-                if newlink.split('/')[3] == 'OutOfRangeNotification':
+                # trying to catch OutOfRangeNotification for older otree versions
+                if response.content == BOT_COMPLETE_HTML_MESSAGE and oldlink == newlink:
                     print('IM DONE')
                     status = False
                     response.success()
-                elif response.ok:
+                elif newlink.split('/')[3] == 'OutOfRangeNotification':
+                    with self.client.get(newlink, name='OutOfRangeNotification', catch_response=True) as final_response:
+                        if final_response.ok:
+                            final_response.success()
+                            status = False
+
+                elif  response.ok:
                     status = response.ok
                     response.success()
                 else:
